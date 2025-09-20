@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title> My Art Portfolio </title>
+</head>
+
+<body>
+    <div class="main-container">
+        <button class="mode-toggle" id="mode-toggle" aria-pressed="false">🌙 Dark Mode</button>
+
+        <section class="greeting-section">
+
+            <h1 id="greeting" class="h1 titles">
+                About Me
+            </h1>
+
+            <div class="about-flex">
+                <img src="fullbody.png" alt="EnjelAshe" class="about-img" width="290" height="400">
+                <div class="about-text">
+
+                    <button id="edit-about-btn" class="edit-btn">Edit</button>
+                    <p class="about-paragraph" id="about-paragraph">
+                        I'm Uramae, but you can call me Enjel! I'm an artist and illustrator (working as EnjelAshe) with a passion for design and conceptualizing ideas. As a 3rd-year Bachelor of Science in Information Technology student at Caraga State University, I'm uniquely positioned to merge my artistic talents with technical development. I'm excited to apply this blend of skills to create engaging and fun digital experiences.
+                    </p>
+                    
+
+                    <div class="social-icons">
+                        <a href="https://web.facebook.com/EnjelAshe" target="_blank" title="Facebook">
+                            <img src="facebook-icon.png" alt="Facebook" width="32" height="32">
+                        </a>
+                        <a href="https://x.com/enjelashe/" target="_blank" title="Twitter">
+                            <img src="twitter-icon.png" alt="Twitter" width="32" height="32">
+                        </a>
+                        <a href="https://www.tumblr.com/enjelashe" target="_blank" title="Tumblr">
+                            <img src="tumblr-icon.png" alt="Tumblr" width="32" height="32">
+                        </a>
+                        <a href="https://bsky.app/profile/enjelashe.bsky.social" target="_blank" title="BlueSky">
+                            <img src="blue-sky-icon.png" alt="BlueSky" width="32" height="32">
+                        </a>
+                        <a href="https://www.tiktok.com/@enjelashe" target="_blank" title="TikTok">
+                            <img src="tiktok-icon.png" alt="TikTok" width="32" height="32">
+                        </a>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </section>
+
+        
+        <hr class="divider">
+
+        <section class="gallery-section">
+
+            <h1 class="h1 titles">
+                ARTWORK GALLERY
+            </h1>
+
+            <p>
+                Artwork I have done! Illustrations, Covers, Profiles and more! Here is a compilation of my proudest works.
+            </p>
+
+            <div class="gallery-grid">
+                <img src="techno.png" alt="technoblade" class="gallery-img vertical">
+                <img src="wanderer collab.png" alt="wanderer" class="gallery-img vertical">
+                <img src="sol and luna cover.jpeg" alt="Sol and Luna Cover" class="gallery-img vertical">
+                <img src="ENJELASHE - AME.png" alt="leap" class="gallery-img vertical">
+                <img src="december.png" alt="december" class="gallery-img vertical">
+                <img src="navia.png" alt="navia" class="gallery-img vertical">
+                <img src="Sol and Luna concept.png" alt="concept art" class="gallery-img vertical">
+                <img src="cn pallete challenge.png" alt="cn color" class="gallery-img vertical">
+                <img src="adrift.png" alt="wanderer" class="gallery-img horizontal">
+                <img src="scaramouche.png" alt="scara" class="gallery-img vertical">
+                <img src="herta.png" alt="Herta" class="gallery-img vertical">
+                <img src="i have 4 moods.gif" alt="pngtuber" class="gallery-img vertical">
+                <img src="kuronushi.png" alt="kuro" class="gallery-img vertical">
+                
+
+            </div> <!-- close .gallery-grid -->
+
+            <div class="animation-section">
+                <h1 class="h1 titles">Animation</h1>
+                <p>
+                    One short fan animation I did based on the first trailer of the game "Omori".
+                </p>
+                <img src="it means everything.gif" alt="aubrey flow" class="gallery-img horizontal animation-img">
+            </div>
+
+            <div class="pixel-art-section">
+                <h1 class="h1 titles">Pixel Art</h1>
+                <p>
+                    Some pixel art I made for fun!
+                </p>
+                <div class="pixel-art-grid">
+                    <img src="Sweetheart and Capt.png" alt="sweetheart and capt pixel art" class="pixel-art-img vertical">
+                    <img src="enjel-pixel.png" alt="enjel pixel art" class="pixel-art-img vertical">
+                    <img src="cog pixel.png" alt="cog pixel art" class="pixel-art-img horizontal">
+                    <img src="smallui.png" alt="ui pixel art" class="pixel-art-img vertical">
+                    <img src="bigui.png" alt="ui2 pixel art" class="pixel-art-img vertical">
+                    
+                </div>
+            </div>
+
+            <div id="modal" class="modal">
+                <span class="modal-close">&times;</span>
+                <img class="modal-content" id="modal-img" alt="">
+            </div>
+
+        </section>
+        
+    </div>
+
+    <script>
+document.querySelectorAll('.gallery-img, .pixel-art-img').forEach(img => {
+    img.onclick = function() {
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        modal.style.display = 'flex';
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+        modalImg.classList.remove('horizontal', 'vertical');
+        if (this.classList.contains('horizontal')) {
+            modalImg.classList.add('horizontal');
+        } else if (this.classList.contains('vertical')) {
+            modalImg.classList.add('vertical');
+        }
+    };
+});
+document.querySelector('.modal-close').onclick = function() {
+    document.getElementById('modal').style.display = 'none';
+};
+document.getElementById('modal').onclick = function(e) {
+    if (e.target === this) this.style.display = 'none';
+};
+
+// Edit button logic for About Me
+const editBtn = document.getElementById('edit-about-btn');
+const aboutParagraph = document.getElementById('about-paragraph');
+let editing = false;
+
+editBtn.onclick = function() {
+    if (!editing) {
+        aboutParagraph.contentEditable = "true";
+        aboutParagraph.focus();
+        editBtn.textContent = "Save";
+        editing = true;
+    } else {
+        aboutParagraph.contentEditable = "false";
+        editBtn.textContent = "Edit";
+        editing = false;
+    }
+};
+</script>
+
+</body>
+
+</html>
